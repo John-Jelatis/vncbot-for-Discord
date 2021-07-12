@@ -1,0 +1,25 @@
+{
+  "name": "vncbot",
+  "version": "0.1.0",
+  "description": "VNC Client... but as a Discord Bot",
+  "main": "main.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/John-Jelatis/vncbot-for-Discord"
+  },
+  "keywords": [
+    "VNC",
+    "Discord",
+    "Bot"
+  ],
+  "author": "John Jelatis",
+  "license": "MIT",
+  "dependencies": {
+    "canvas": "^2.8.0",
+    "discord.js": "^12.5.3",
+    "rfb2": "^0.2.2"
+  }
+}
