@@ -49,7 +49,7 @@ module.exports = {
 
 		svrCfg.members[msg.author.id].activeVNC = args[1];
 
-		if(before) {
+		if(before && conns[before]) {
 			embed.addField('Before', conns[before].name, true);
 		}
 
