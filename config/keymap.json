@@ -12,6 +12,7 @@
     "backspace": [ 65288, false ],
     "tab": [ 65289, false ],
     "enter": [ 65293, false ],
+    "\n": [ 65293, false ],
     "return": [ 65293, false ],
     "esc": [ 65307, false ],
     "del": [ 65535, false ],
