@@ -6,6 +6,8 @@ module.exports = class VNCConnection {
 		this.info = info;
 		this.conn = null;
 
+		this.mouseAt = [ 0, 0, 0 ];
+
 		this.canvas = canvas.createCanvas(1, 1);
 		this.context = this.canvas.getContext('2d', { 'alpha': false });
 	}
@@ -40,9 +42,12 @@ module.exports = class VNCConnection {
 		this.conn.on('resize', () => {
 			this.canvas.width = this.getWidth();
 			this.canvas.height = this.getHeight();
+
+			this.mouseMove();
 		});
 
 		this.conn.stream.on('end', () => {
+			console.debug('[VNCConnection] Disconnected from ' + this.info.name);
 			this.conn = null;
 		});
 
@@ -51,9 +56,7 @@ module.exports = class VNCConnection {
 				this.canvas.width = this.getWidth();
 				this.canvas.height = this.getHeight();
 
-				console.debug('[VNCConnection] Connected to ' + (
-					this.info.name || (this.info.ip + ':' + this.info.port)
-				));
+				console.debug('[VNCConnection] Connected to ' + this.info.name);
 				res();
 			});
 
@@ -97,7 +100,6 @@ module.exports = class VNCConnection {
 	}
 
 	pressKey(key, state) {
-		console.log((state ? '' : 'de') + 'pressing key ' + key)
 		return new Promise((res, rej) => {
 			if(!this.isConnected()) {
 				rej('This connection is currently inactive!');
@@ -107,6 +109,52 @@ module.exports = class VNCConnection {
 			// TODO: find correct way to await key press
 			setTimeout(res, 25);
 			this.conn.keyEvent(key, state);
+		});
+	}
+
+	mouseMove(x = this.mouseAt[0], y = this.mouseAt[1]) {
+		return new Promise((res, rej) => {
+			if(!this.isConnected()) {
+				rej('This connection is currently inactive!');
+				return ;
+			}
+
+			// constrain location of mouse
+			x = Math.min(x, this.canvas.width);
+			x = Math.max(x, 0);
+
+			y = Math.min(y, this.canvas.height);
+			y = Math.max(y, 0);
+
+			// update state array
+			if(!Number.isNaN(x)) this.mouseAt[0] = x;
+			if(!Number.isNaN(y)) this.mouseAt[1] = y;
+
+			// TODO: find correct way to await mouse movement
+			setTimeout(res, 25);
+			this.conn.pointerEvent(...this.mouseAt);
+		});
+	}
+
+	mouseMoveRelative(x = 0, y = 0) {
+		return this.mouseMove(
+			this.mouseAt[0] + x,
+			this.mouseAt[1] + y
+		);
+	}
+
+	mouseStateSet(state = this.mouseAt[2]) {
+		return new Promise((res, rej) => {
+			if(!this.isConnected()) {
+				rej('This connection is currently inactive!');
+				return ;
+			}
+
+			this.mouseAt[2] = state;
+
+			// TODO: find correct way to await mouse movement
+			setTimeout(res, 25);
+			this.conn.pointerEvent(...this.mouseAt);
 		});
 	}
 };
