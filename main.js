@@ -47,7 +47,7 @@ loadServersConfig: {
 			console.error('Please double-check the file\'s validity and permissions prior to restarting the bot.');
 		} else {
 			console.error('Could not find configuration file `' + vncServersName + '`, creating it for you.');
-			console.error('If you have already setup your configuration file, ensure that you are in the ');
+			console.error('If you have already setup your configuration file, ensure that you are in the same directory.');
 
 			fs.writeFileSync(vncServersPath, JSON.stringify({
 				'token': 'YOUR TOKEN HERE',
