@@ -13,8 +13,9 @@ const invalidUsage = new Discord.MessageEmbed()
 module.exports = {
 	'name': 'type',
 	'aliases': [
-		'type'
+		't'
 	],
+	'desc': 'Press keys as to type a string of text.',
 	'run': async function(msg, args) {
 		if(args.length < 2) {
 			msg.channel.send(invalidUsage);

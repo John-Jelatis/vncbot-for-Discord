@@ -1,8 +1,5 @@
 const Discord = require('discord.js');
 
-// used to execute screen send command
-const sendScreen = require('../screen.js').run;
-
 const commands = [
 	'right', 'down', 'left', 'up',
 

@@ -105,7 +105,7 @@ setInterval(() => {
 fs
 	.readdirSync('./commands')
 	.filter(file => file.endsWith('.js'))
-	.forEach(file => {
+	.map(file => {
 		const command = require('./commands/' + file);
 
 		if(command.name) {
@@ -118,10 +118,14 @@ fs
 			});
 		}
 
+		return command;
+	})
+	.forEach(command => {
 		if(command.setup) {
 			command.setup(client);
 		}
 	});
+
 
 // Load events
 fs

@@ -17,6 +17,7 @@ module.exports = {
 	'aliases': [
 		'm'
 	],
+	'desc': 'Interact with the mouse.',
 	'run': async function(msg, args) {
 		if(args.length < 2) {
 			msg.channel.send(invalidUsage);

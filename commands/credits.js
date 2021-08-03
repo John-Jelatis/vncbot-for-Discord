@@ -37,8 +37,9 @@ if(package.author.indexOf('John Jelatis') < 0) {
 module.exports = {
 	'name': 'credits',
 	'aliases': [
-		'source', 'src'
+		'source', 'src', 'info'
 	],
+	'desc': 'Get bot information (version, repo, maintainer).',
 	'run': function(msg) {
 		msg.channel.send(embed);
 	}

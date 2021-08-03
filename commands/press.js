@@ -15,6 +15,7 @@ module.exports = {
 	'aliases': [
 		'p'
 	],
+	'desc': 'Press keys (for a key combo).',
 	'run': async function(msg, args) {
 		if(args.length < 2) {
 			msg.channel.send(invalidUsage);

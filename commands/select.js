@@ -5,6 +5,7 @@ module.exports = {
 	'aliases': [
 		'sel'
 	],
+	'desc': 'Select VNC Connection by ID.',
 	'run': function(msg, args) {
 		const svrCfg = this.dscServersConfig.get(msg.guild.id);
 

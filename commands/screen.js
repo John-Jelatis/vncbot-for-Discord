@@ -6,6 +6,7 @@ module.exports = {
 		'scr',
 		's'
 	],
+	'desc': 'Request connection screen.',
 	'run': async function(msg, args) {
 		msg.channel.startTyping();
 

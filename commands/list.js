@@ -7,6 +7,7 @@ module.exports = {
 		'list-desktops',
 		'lis'
 	],
+	'desc': 'List available VNC Connections.',
 	'run': function(msg) {
 		const conns = Object.entries(this.vncServersConfig.servers);
 

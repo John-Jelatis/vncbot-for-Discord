@@ -10,6 +10,7 @@ module.exports = {
 	'aliases': [
 		'refresh'
 	],
+	'desc': '[*ADMIN* or *VNCBot Manager*] Force reconnect VM.',
 	'hasPermission': function(msg) {
 		// assume no permission
 		let hasPermission = false;

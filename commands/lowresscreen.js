@@ -12,6 +12,7 @@ const invalidUsage = new Discord.MessageEmbed()
 module.exports = {
 	'name': 'lscr',
 	'aliases': [ ],
+	'desc': '(Temporary) Get screen image in arbitrarily low resolution.',
 	'run': async function(msg, args) {
 		if(args.length < 3) {
 			msg.channel.send(invalidUsage);
