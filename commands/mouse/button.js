@@ -28,11 +28,6 @@ const actions = {
 module.exports = {
 	'aliases': Object.keys(actions),
 	'run': async function(msg, args) {
-		if(args.length < 2) {
-			msg.channel.send(invalidUsage);
-			return ;
-		}
-
 		const svrInf = this.dscServersConfig.get(msg.guild.id);
 		const vnc = svrInf.members[msg.author.id].activeVNC;
 
