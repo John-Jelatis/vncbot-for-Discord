@@ -23,7 +23,8 @@ module.exports = {
 			this.dscServersConfig.set(msg.guild.id, {
 				'prefix': '!',
 				'defaultServer': this.vncServersConfig.defaultServer || Object.keys(this.vncServersConfig.servers)[0],
-				'members': { }
+				'members': { },
+				'banned': [ ]
 			});
 		}
 
@@ -43,6 +44,29 @@ module.exports = {
 			svrCfg.members[msg.author.id] = {
 				'activeVNC': svrCfg.defaultServer
 			};
+		}
+
+		// since this was added well after the project started, this will remain here for at least a few versions
+		svrCfg.banned = svrCfg.banned || [ ];
+
+		permissionChecks: {
+			// assume no permission
+			let hasPermission = false;
+
+			// but if they have the role
+			hasPermission = hasPermission || msg.member.roles.cache.some(r => (r.name === 'VNCBot Manager'));
+
+			// or administration permissions
+			hasPermission = hasPermission || msg.member.hasPermission('ADMINISTRATOR');
+			hasPermission = hasPermission || msg.member.hasPermission('MANAGE_GUILD');
+
+			// or aren't banned
+			hasPermission = hasPermission || (svrCfg.banned.indexOf(msg.author.id) < 0);
+
+			if(!hasPermission) {
+				msg.channel.send(noPerms);
+				return ;
+			}
 		}
 
 		// evaluate command

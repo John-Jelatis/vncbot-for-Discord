@@ -36,7 +36,7 @@ module.exports = {
 	'aliases': [
 		'pre'
 	],
-	'desc': '[*ADMIN* or *VNCBot Manager*] Set prefix',
+	'desc': 'Set prefix',
 	'hasPermission': function(msg) {
 		// assume no permission
 		let hasPermission = false;
