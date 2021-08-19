@@ -13,10 +13,16 @@ module.exports = class VNCConnection {
 	}
 
 	connect() {
-		this.conn = rfb2.createConnection({
+		const settings = {
 			'host': this.info.ip,
 			'port': this.info.port
-		});
+		};
+
+		if(this.info.auth) {
+			settings.password = this.info.auth.password;
+		}
+
+		this.conn = rfb2.createConnection(settings);
 
 		// TODO: refactor these events
 		// for now I just wanna get them working
